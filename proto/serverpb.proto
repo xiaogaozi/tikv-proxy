@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package serverpb;
+
+service TikvProxy {
+  // RawKV commands
+  rpc RawGet(RawGetRequest) returns (RawGetResponse) {}
+  rpc RawBatchGet(RawBatchGetRequest) returns (RawBatchGetResponse) {}
+  rpc RawPut(RawPutRequest) returns (RawPutResponse) {}
+  rpc RawBatchPut(RawBatchPutRequest) returns (RawBatchPutResponse) {}
+  rpc RawDelete(RawDeleteRequest) returns (RawDeleteResponse) {}
+  rpc RawBatchDelete(RawBatchDeleteRequest) returns (RawBatchDeleteResponse) {}
+  rpc RawDeleteRange(RawDeleteRangeRequest) returns (RawDeleteRangeResponse) {}
+  rpc RawScan(RawScanRequest) returns (RawScanResponse) {}
+  rpc RawReverseScan(RawReverseScanRequest) returns (RawReverseScanResponse) {}
+}
+
+message RawGetRequest {
+  bytes key = 1;
+}
+
+message RawGetResponse {
+  string error = 1;
+  bytes value = 2;
+}
+
+message RawBatchGetRequest {
+  repeated bytes keys = 1;
+}
+
+message RawBatchGetResponse {
+  string error = 1;
+  repeated bytes values = 2;
+}
+
+message RawPutRequest {
+  bytes key = 1;
+  bytes value = 2;
+}
+
+message RawPutResponse {
+  string error = 1;
+}
+
+message RawBatchPutRequest {
+  repeated bytes keys = 1;
+  repeated bytes values = 2;
+}
+
+message RawBatchPutResponse {
+  string error = 1;
+}
+
+message RawDeleteRequest {
+  bytes key = 1;
+}
+
+message RawDeleteResponse {
+  string error = 1;
+}
+
+message RawBatchDeleteRequest {
+  repeated bytes keys = 1;
+}
+
+message RawBatchDeleteResponse {
+  string error = 1;
+}
+
+message RawDeleteRangeRequest {
+  bytes start_key = 1;
+  bytes end_key = 2;
+}
+
+message RawDeleteRangeResponse {
+  string error = 1;
+}
+
+message RawScanRequest {
+  bytes start_key = 1;
+  bytes end_key = 2;
+  uint32 limit = 3;
+}
+
+message RawScanResponse {
+  string error = 1;
+  repeated bytes keys = 2;
+  repeated bytes values = 3;
+}
+
+message RawReverseScanRequest {
+  bytes start_key = 1;
+  bytes end_key = 2;
+  uint32 limit = 3;
+}
+
+message RawReverseScanResponse {
+  string error = 1;
+  repeated bytes keys = 2;
+  repeated bytes values = 3;
+}
