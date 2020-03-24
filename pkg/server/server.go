@@ -68,7 +68,7 @@ func (s *Server) RawBatchPut(ctx context.Context, req *pb.RawBatchPutRequest) (*
 
 func (s *Server) RawDelete(ctx context.Context, req *pb.RawDeleteRequest) (*pb.RawDeleteResponse, error) {
 	res := &pb.RawDeleteResponse{}
-	if err := s.tikvClient.Delete(req.Key); err != nil {
+	if err := s.tikvClient.Delete(req.GetKey()); err != nil {
 		res.Error = err.Error()
 		return res, err
 	} else {
